@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import json
 app = Flask(__name__)
 
 
@@ -13,12 +14,10 @@ def second():
     return "Hello, how are you?"
 
 
-@app.route("/pets/<jsonData>", methods=["GET", "POST"])
-def pets(jsonData):
-    if request.method == "POST":
-        return jsonData
-    else:
-        return "no data"
+@app.route("/pets", methods=["POST"])
+def pets():
+    result = json.dumps(request.json)
+    return(result)
 
 
 if __name__ == "__main__":
